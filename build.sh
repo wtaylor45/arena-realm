@@ -1,3 +1,11 @@
+CONFIG_FILE='./config.txt'
+source $CONFIG_FILE
+BUILD_DIR='./build/libs/'
+MODID='arenarealm'
+VERSION='0.0.1'
+JAR_PATH="${BUILD_DIR}${MODID}-${VERSION}.jar"
+SERVER_PATH="${AWS_DNS}:${SERVER_MOD_DIR}"
+echo $SERVER_PATH
 ./gradlew build
-
-scp -i minecraft-key.pem build/libs/arenarealm-0.0.1.jar ec2-user@ec2-34-197-181-44.compute-1.amazonaws.com:/home/ec2-user/minecraft/mods
+scp -i ${KEYFILE} ${JAR_PATH} ec2-user@${SERVER_PATH}
+cp ${JAR_PATH} ${CLIENT_MOD_DIR}
