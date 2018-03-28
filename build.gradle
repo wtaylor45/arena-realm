@@ -12,8 +12,8 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 
 version = "0.0.1"
-group = "com.titosworld.arenarealm" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "arenarealm"
+group = "com.titosworld.gladius" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "gladius"
 
 sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 compileJava {

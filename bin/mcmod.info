@@ -1,11 +1,11 @@
 [{
-  "modid": "arenarealm",
-  "name": "Arena Realm",
+  "modid": "gladius",
+  "name": "Gladius",
   "description": "Adds a new realm that has an Arena y'know?",
   "version": "0.0.1",
   "mcversion": "1.12.2",
-  "logoFile": "assets/examplemod/textures/logo.png",
-  "url": "minecraftforge.net/",
+  "logoFile": "",
+  "url": "",
   "updateJSON": "minecraftforge.net/versions.json",
   "authorList": ["EightCraft"],
   "credits": "I'd like to thank Tito :)"
