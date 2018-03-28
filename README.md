@@ -12,7 +12,11 @@ This will walk you through setting up your development environment for use with 
 ### Steps
 1. Clone this repository.
 2. From the terminal, access the root directory of the repository `./setup.sh`. Run the setup file which will ask you for a few things:
-  1. The key file used to access your AWS instance
-  2. The full or relative path to your client's `mods` folder
-  3. The Public DNS of the EC2 instance you'll be using
-  4. The full path to the server's `mods` folder
+  * The key file used to access your AWS instance
+  * The full or relative path to your client's `mods` folder
+  * The Public DNS of the EC2 instance you'll be using
+  * The full path to the server's `mods` folder
+  
+ Provide the setup scrip with this information, if you make any mistakes, you can enter the generated `config.txt` file and make manual edits. 
+ 
+3. At this point, your workspace should be setup. To build the mod, run `./build.sh`. This will automically build the mod, and send it to the server and your client.
