@@ -7,7 +7,7 @@ This will walk you through setting up your development environment for use with 
 ### Prerequistes 
 * Minecraft Forge 1.12.2: [https://files.minecraftforge.net/](https://files.minecraftforge.net/)
 * Eclipse: [https://www.eclipse.org/downloads/](https://www.eclipse.org/downloads/)
-* Git BASH (Windows Only): {https://git-scm.com/downloads](https://git-scm.com/downloads)
+* Git BASH (Windows Only): [https://git-scm.com/downloads](https://git-scm.com/downloads)
 
 ### Steps
 1. Clone this repository.
