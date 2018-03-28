@@ -11,6 +11,5 @@ CLIENT_MOD_DIR="$(echo $CLIENT_MOD_DIR | sed 's/\\/\//g')"
 SERVER_MOD_DIR="$(echo $SERVER_MOD_DIR | sed 's/\\/\//g')"
 printf "KEYFILE=%s\nCLIENT_MOD_DIR=%s\nAWS_DNS=%s\nSERVER_MOD_DIR=%s" $KEYFILE $CLIENT_MOD_DIR $AWS_DNS $SERVER_MOD_DIR > $CONFIG_FILE
 
-#./gradlew build
-#scp -i minecraft-key.pem build/libs/arenarealm-0.0.1.jar ec2-user@ec2-34-197-181-44.compute-1.amazonaws.com:/home/ec2-user/minecraft/mods
-#cp build/libs/arenarealm-0.0.1.jar C:/Users/Will/AppData/Roaming/.minecraft/mods
+./gradlew setupDecompWorkspace
+./gradlew eclipse
