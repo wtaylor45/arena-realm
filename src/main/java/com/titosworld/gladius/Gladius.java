@@ -27,14 +27,14 @@ public class Gladius {
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event) {
 		Utils.getLogger().info(Reference.NAME+" version "+Reference.NAME+" is loading...");
-		creativeTab = new CreativeTabTutorial(CreativeTabs.getNextID(), "realm_tab");
+		creativeTab = new CreativeTabTutorial(CreativeTabs.getNextID(), "gladius_tab");
 		ModItems.init();
 		proxy.preInit(event);
 	}
 
 	@EventHandler
 	public static void init(FMLInitializationEvent event) {
-		Utils.getLogger().info(Reference.NAME+" version "+Reference.NAME+" has been loaded successfully!");
+		Utils.getLogger().info(Reference.NAME+" version "+Reference.VERSION+" has been loaded successfully!");
 		proxy.init(event);
 	}
 
