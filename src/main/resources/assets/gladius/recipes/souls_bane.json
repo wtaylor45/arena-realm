@@ -1,6 +1,17 @@
 {
-	"parent": "item/generated",
-	"textures": {
-		"layer0": "gladius:items/blood_diamond"
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+	  " A ",
+	  " A ",
+	  " A "
+	],
+	"key": {
+	  "A": {
+		  "item": "minecraft:dirt",
+		  "data": 0
+	  }
+	},
+	"result": {
+	  "item": "minecraft:diamond"
 	}
 }
