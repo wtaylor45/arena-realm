@@ -1,4 +1,4 @@
 KEYFILE=./minecraft-key.pem
-CLIENT_MOD_DIR=/Users/willtaylor/Library/Application\ Support/minecraft/mods
+CLIENT_MOD_DIR=C:/Users/Will/AppData/Roaming/.minecraft/mods
 AWS_DNS=ec2-34-197-181-44.compute-1.amazonaws.com
 SERVER_MOD_DIR=/home/ec2-user/minecraft/mods

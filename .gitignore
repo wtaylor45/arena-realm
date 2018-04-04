@@ -4,3 +4,4 @@
 *.pem
 *.ini
 /.gradle/
+config.txt

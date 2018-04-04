@@ -13,10 +13,12 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 @Mod.EventBusSubscriber(modid = Reference.MODID)
 public class ModItems {
-	public static Item BLOOD_DIAMOND = new BloodDiamond();
+	public static Item BLOOD_DIAMOND = new ItemBloodDiamond();
+	public static Item SOULS_BANE = new ItemSoulsBane();
 	
 	public final static Item[] items = {
-			BLOOD_DIAMOND
+			BLOOD_DIAMOND,
+			SOULS_BANE
 	};
 	
 	public static final Set<Item> RENDER_ITEMS = new HashSet<>();

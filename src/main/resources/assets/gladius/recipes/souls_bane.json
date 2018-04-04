@@ -3,15 +3,18 @@
 	"pattern": [
 	  " A ",
 	  " A ",
-	  " A "
+	  " S "
 	],
 	"key": {
 	  "A": {
-		  "item": "minecraft:dirt",
-		  "data": 0
+		  "item": "gladius:blood_diamond"
+	  },
+	  "S": {
+	  	"item": "minecraft:stick",
+	  	"data": 0
 	  }
 	},
 	"result": {
-	  "item": "minecraft:diamond"
+		"item": "gladius:souls_bane"
 	}
 }
