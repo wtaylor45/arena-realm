@@ -7,6 +7,6 @@ JAR_PATH="${BUILD_DIR}${MODID}-${VERSION}.jar"
 SERVER_PATH="${AWS_DNS}:${SERVER_MOD_DIR}"
 ./gradlew build
 echo "Starting scp.."
-scp -i "${KEYFILE}" "${JAR_PATH}" "ec2-user@${SERVER_PATH}"
+cp -i "${JAR_PATH}" "${SERVER_MOD_DIR}"
 echo "Starting cp..."
 cp "${JAR_PATH}" "${CLIENT_MOD_DIR}"
