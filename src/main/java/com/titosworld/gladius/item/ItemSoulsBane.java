@@ -2,7 +2,8 @@ package com.titosworld.gladius.item;
 
 import com.titosworld.gladius.Gladius;
 
-import assets.gladius.potion.GladiusEffects;
+import assets.gladius.potion.ModPotions;
+import assets.gladius.potion.PotionEffectLifeVamp;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.item.Item;
@@ -47,7 +48,7 @@ public class ItemSoulsBane extends ItemSword {
 					+this.currentCharge+"/"+this.MAX_CHARGE+")."));
 			}
 		}else {
-	    	target.addPotionEffect(GladiusEffects.LIFE_VAMP.createEffect(attacker, 100));
+	    	target.addPotionEffect(new PotionEffectLifeVamp(ModPotions.LIFE_VAMP, 100, attacker));
 	    	this.currentCharge = Math.max(this.currentCharge-1,  0);
 		}
         stack.damageItem(1, attacker);
