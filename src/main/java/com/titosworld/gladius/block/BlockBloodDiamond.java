@@ -14,6 +14,7 @@ public class BlockBloodDiamond extends GladiusBlock {
 		super("blood_diamond_ore", Material.IRON);
 		setDefaultState(blockState.getBaseState());
 		setHardness(6.0f);
+		setLightLevel(4.0f);
 		Utils.getLogger().info(this.getRegistryName());
 	}
 	

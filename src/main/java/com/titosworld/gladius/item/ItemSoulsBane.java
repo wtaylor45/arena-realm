@@ -1,9 +1,9 @@
 package com.titosworld.gladius.item;
 
 import com.titosworld.gladius.Gladius;
+import com.titosworld.gladius.potion.ModPotions;
+import com.titosworld.gladius.potion.PotionEffectLifeVamp;
 
-import assets.gladius.potion.ModPotions;
-import assets.gladius.potion.PotionEffectLifeVamp;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.item.Item;

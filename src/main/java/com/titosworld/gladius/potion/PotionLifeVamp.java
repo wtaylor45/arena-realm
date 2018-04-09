@@ -1,4 +1,4 @@
-package assets.gladius.potion;
+package com.titosworld.gladius.potion;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;

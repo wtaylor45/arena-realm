@@ -1,4 +1,4 @@
-package assets.gladius.potion;
+package com.titosworld.gladius.potion;
 
 import com.titosworld.gladius.Reference;
 import com.titosworld.gladius.util.Utils;

@@ -4,6 +4,7 @@ import com.titosworld.gladius.item.ModItems;
 import com.titosworld.gladius.proxy.CommonProxy;
 import com.titosworld.gladius.tab.CreativeTabTutorial;
 import com.titosworld.gladius.util.Utils;
+import com.titosworld.gladius.world.ModWorldGenerators;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.Mod;
@@ -35,6 +36,7 @@ public class Gladius {
 	@EventHandler
 	public static void init(FMLInitializationEvent event) {
 		Utils.getLogger().info(Reference.NAME+" version "+Reference.VERSION+" has been loaded successfully!");
+		ModWorldGenerators.registerWorldGen();
 		proxy.init(event);
 	}
 
