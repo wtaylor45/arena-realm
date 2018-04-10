@@ -1,2 +1,2 @@
-CLIENT_MOD_DIR=C:/Users/Will/AppData/Roaming/.minecraft/mods
-SERVER_MOD_DIR=E:/Files/Documents/playground/local-dev/mods
+CLIENT_MOD_DIR=/Users/willtaylor/Library/Application\ Support/minecraft/mods
+SERVER_MOD_DIR=../../local-dev/mods
