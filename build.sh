@@ -10,3 +10,4 @@ echo "Starting scp.."
 cp "${JAR_PATH}" "${SERVER_MOD_DIR}"
 echo "Starting cp..."
 cp "${JAR_PATH}" "${CLIENT_MOD_DIR}"
+/Applications/Minecraft.app/Contents/MacOS/launcher
