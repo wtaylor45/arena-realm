@@ -1,0 +1,13 @@
+{
+	"pools": [
+		{
+			"name": "main",
+			"entries": [
+				{
+					"type": "item",
+					"name": "gladius:blood_diamond"
+				}
+			]
+		}
+	]
+}

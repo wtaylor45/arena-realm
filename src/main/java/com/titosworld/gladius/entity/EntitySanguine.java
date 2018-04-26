@@ -1,9 +1,11 @@
 package com.titosworld.gladius.entity;
 
+import javax.annotation.Nullable;
+
+import com.titosworld.gladius.loot.ModLootTables;
 import com.titosworld.gladius.potion.ModPotions;
 import com.titosworld.gladius.potion.PotionEffectLifeVamp;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -11,20 +13,16 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.BossInfo;
-import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.World;
 
 public class EntitySanguine extends EntityMob {
-	
-    private final BossInfoServer bossInfo = (BossInfoServer)(new BossInfoServer(this.getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
-	
+	private final ResourceLocation lootTable = ModLootTables.LOOT_TABLE_TEST;
+    
 	public EntitySanguine(World worldIn) {
 		super(worldIn);
 		((PathNavigateGround) this.getNavigator()).setCanSwim(true);
@@ -40,41 +38,29 @@ public class EntitySanguine extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(100.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(64.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
 		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
 	}
 	
 	@Override
+	@Nullable
+	protected ResourceLocation getLootTable() {
+		return lootTable;
+	}
+	
+	@Override
 	public boolean isImmuneToExplosions() {
 		return true;
 	}
-	
-	public void addTrackingPlayer(EntityPlayerMP player)
-    {
-        super.addTrackingPlayer(player);
-        this.bossInfo.addPlayer(player);
-    }
-	
-	/**
-     * Removes the given player from the list of players tracking this entity. See {@link Entity#addTrackingPlayer} for
-     * more information on tracking.
-     */
-    public void removeTrackingPlayer(EntityPlayerMP player)
-    {
-        super.removeTrackingPlayer(player);
-        this.bossInfo.removePlayer(player);
-    }
 
 	@Override
 	public void onLivingUpdate() {
 		if(this.isEntityInsideOpaqueBlock()) {
 			this.world.createExplosion(this, this.posX, this.posY, this.posZ, 5.0F, true);
 		}
-		
-		if(this.rand.nextInt(100) == 1) this.world.playSound(this.posX, this.posY, this.posZ, SoundEvents.ENTITY_POLAR_BEAR_WARNING, this.getSoundCategory(), 5.0f, 0.8F + this.rand.nextFloat() * 0.3F, false);
-		
+				
 		if (!this.world.isRemote && this.getAttackTarget() != null)
         {
             EntityLivingBase entity = this.getAttackTarget();
@@ -121,17 +107,11 @@ public class EntitySanguine extends EntityMob {
 
 	@Override
 	protected void updateAITasks() {
-		this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
 		super.updateAITasks();
 	}
 
 	@Override
 	public void fall(float distance, float damageMultiplier) {
-	}
-	
-	@Override
-	public boolean getCanSpawnHere() {
-		return true;
 	}
 
 	static class AIHuntDown extends EntityAINearestAttackableTarget<EntityPlayer> {

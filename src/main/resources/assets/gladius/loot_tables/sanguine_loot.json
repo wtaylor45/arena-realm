@@ -1,0 +1,15 @@
+{
+	"pools": [
+		{
+			"name": "main",
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "item",
+					"name": "gladius:blood_diamond",
+					"weight": 40
+				}
+			]
+		}
+	]
+}
