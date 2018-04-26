@@ -45,7 +45,8 @@ public class ModModelManager {
 	};
 	
 	private void registerBlockModels() {
-		registerBlockItemModel(ModBlocks.BLOOD_DIAMOND.getDefaultState());
+		//registerBlockItemModel(ModBlocks.BLOOD_DIAMOND.getDefaultState());
+		registerBlockItemModel(ModBlocks.BLOOD_DIAMOND_CORE.getDefaultState());
 	}
 	
 	private void registerBlockItemModel(final IBlockState state) {

@@ -20,9 +20,11 @@ public class ModBlocks {
 	public static final Set<ItemBlock> RENDER_BLOCKS = new HashSet<ItemBlock>();
 	
 	public static final BlockBloodDiamond BLOOD_DIAMOND = new BlockBloodDiamond(); 
+	public static final BlockBloodDiamondCore BLOOD_DIAMOND_CORE = new BlockBloodDiamondCore();
 	
 	private static final Block blocks[] = {
 			//BLOOD_DIAMOND
+			BLOOD_DIAMOND_CORE
 	};
 	
 	@SubscribeEvent
@@ -38,6 +40,7 @@ public class ModBlocks {
 		
 		final ItemBlock items[] = {
 				//new ItemBlock(BLOOD_DIAMOND)
+				new ItemBlock(BLOOD_DIAMOND_CORE)
 		};
 		
 		for(final ItemBlock item : items) {
