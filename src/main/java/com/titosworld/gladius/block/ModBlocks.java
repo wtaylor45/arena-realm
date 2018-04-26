@@ -22,7 +22,7 @@ public class ModBlocks {
 	public static final BlockBloodDiamond BLOOD_DIAMOND = new BlockBloodDiamond(); 
 	
 	private static final Block blocks[] = {
-			BLOOD_DIAMOND
+			//BLOOD_DIAMOND
 	};
 	
 	@SubscribeEvent
@@ -37,7 +37,7 @@ public class ModBlocks {
 		final IForgeRegistry<Item> registry = event.getRegistry();
 		
 		final ItemBlock items[] = {
-				new ItemBlock(BLOOD_DIAMOND)
+				//new ItemBlock(BLOOD_DIAMOND)
 		};
 		
 		for(final ItemBlock item : items) {
