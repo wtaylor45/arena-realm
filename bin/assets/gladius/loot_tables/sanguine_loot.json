@@ -1,13 +1,42 @@
 {
 	"pools": [
 		{
-			"name": "main",
+			"name": "1",
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "item",
+					"name": "minecraft:gold_ingot",
+					"weight": 1,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 9,
+								"max": 40
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "2",
 			"rolls": 1,
 			"entries": [
 				{
 					"type": "item",
 					"name": "gladius:blood_diamond",
-					"weight": 40
+					"weight": 1,
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"min": 1,
+								"max": 3
+							}
+						}
+					]
 				}
 			]
 		}

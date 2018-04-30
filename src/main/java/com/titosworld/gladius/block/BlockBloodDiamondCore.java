@@ -12,6 +12,7 @@ public class BlockBloodDiamondCore extends GladiusBlock {
 
 	public BlockBloodDiamondCore() {
 		super("blood_diamond_core", Material.IRON);
+		this.setLightLevel(4.0f/16.0f);
 	}
 
 	@Override

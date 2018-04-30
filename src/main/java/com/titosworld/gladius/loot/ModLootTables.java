@@ -4,12 +4,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.titosworld.gladius.Reference;
+import com.titosworld.gladius.util.Utils;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootTableList;
 
 public class ModLootTables {
-	public static final ResourceLocation LOOT_TABLE_TEST = RegistrationHandler.create("sanguine_loot");
+	public static final ResourceLocation SANGUINE_LOOT = RegistrationHandler.create("sanguine_loot");
 
 
 	/**
@@ -35,6 +36,7 @@ public class ModLootTables {
 		protected static ResourceLocation create(final String id) {
 			final ResourceLocation lootTable = new ResourceLocation(Reference.MODID, id);
 			RegistrationHandler.LOOT_TABLES.add(lootTable);
+			Utils.getLogger().info("ADDING LOOT TABLE: "+lootTable.toString());
 			return lootTable;
 		}
 	}

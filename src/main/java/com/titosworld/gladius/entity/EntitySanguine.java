@@ -1,11 +1,15 @@
 package com.titosworld.gladius.entity;
 
+import java.util.Arrays;
+
 import javax.annotation.Nullable;
 
 import com.titosworld.gladius.loot.ModLootTables;
 import com.titosworld.gladius.potion.ModPotions;
 import com.titosworld.gladius.potion.PotionEffectLifeVamp;
+import com.titosworld.gladius.util.Utils;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
@@ -13,6 +17,7 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -20,8 +25,21 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+/**
+ * Sanguine mini-boss. Will spawn in caves and break blocks to reach the player at a speed slightly slower than walking speed.
+ * Sanguine can fly up to reach the player, and can inflict {@link PotionEffectLifeVamp} on the player.
+ * @author willtaylor
+ */
 public class EntitySanguine extends EntityMob {
-	private final ResourceLocation lootTable = ModLootTables.LOOT_TABLE_TEST;
+	private final ResourceLocation lootTable = ModLootTables.SANGUINE_LOOT;
+	// List of blocks that sanguine cannot break
+	protected final Block[] blacklist = {
+			Blocks.BEDROCK,
+			Blocks.OBSIDIAN,
+			Blocks.WATER,
+			Blocks.LAVA,
+			Blocks.GLOWSTONE
+	};
     
 	public EntitySanguine(World worldIn) {
 		super(worldIn);
@@ -38,8 +56,8 @@ public class EntitySanguine extends EntityMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(64.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(24.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.23D);
 		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
 	}
@@ -47,6 +65,7 @@ public class EntitySanguine extends EntityMob {
 	@Override
 	@Nullable
 	protected ResourceLocation getLootTable() {
+		Utils.getLogger().info("GET LOOT TABLE: "+lootTable.toString());
 		return lootTable;
 	}
 	
@@ -54,11 +73,32 @@ public class EntitySanguine extends EntityMob {
 	public boolean isImmuneToExplosions() {
 		return true;
 	}
+	
+	@Override
+	public boolean getCanSpawnHere()
+    {
+		// 1 percent chance that it will spawn this time
+		if(this.rand.nextInt(50) != 1) return false;
+		
+        BlockPos blockpos = new BlockPos(this.posX, this.getEntityBoundingBox().minY, this.posZ);
+        
+        if (blockpos.getY() > 35)
+        {
+            return false;
+        }
+        else
+        {
+            int currentLightLevel = this.world.getLightFromNeighbors(blockpos);
+            int maxLightLevel = 4;
+
+            return currentLightLevel > this.rand.nextInt(maxLightLevel) ? false : super.getCanSpawnHere();
+        }
+    }
 
 	@Override
 	public void onLivingUpdate() {
 		if(this.isEntityInsideOpaqueBlock()) {
-			this.world.createExplosion(this, this.posX, this.posY, this.posZ, 5.0F, true);
+			//this.world.createExplosion(this, this.posX, this.posY, this.posZ, 5.0F, true);
 		}
 				
 		if (!this.world.isRemote && this.getAttackTarget() != null)
@@ -114,9 +154,7 @@ public class EntitySanguine extends EntityMob {
 	public void fall(float distance, float damageMultiplier) {
 	}
 
-	static class AIHuntDown extends EntityAINearestAttackableTarget<EntityPlayer> {
-		private int cooldown = 100;
-		
+	static class AIHuntDown extends EntityAINearestAttackableTarget<EntityPlayer> {		
 		public AIHuntDown(final EntitySanguine sanguineIn) {
 			super(sanguineIn, EntityPlayer.class, false);
 		}
@@ -126,29 +164,26 @@ public class EntitySanguine extends EntityMob {
 			if(this.taskOwner.getAttackTarget() != null && this.taskOwner.getNavigator().noPath()) {
 				EntityLivingBase target = this.taskOwner.getAttackTarget();
 				EnumFacing dir = this.taskOwner.getHorizontalFacing();
+				Block[] blacklist = ((EntitySanguine)this.taskOwner).blacklist;
 				if(this.taskOwner.collidedVertically && target.posY != this.taskOwner.posY) {
 					int offset = target.posY > this.taskOwner.posY ? 1 : -1;
 					final BlockPos blockPos = new BlockPos(this.taskOwner.posX, this.taskOwner.posY+offset, this.taskOwner.posZ);
-					this.taskOwner.getEntityWorld().destroyBlock(blockPos, true);
+					final Block block = this.taskOwner.getEntityWorld().getBlockState(blockPos).getBlock();
+					if(!Arrays.asList(blacklist).contains(block)) 
+						this.taskOwner.getEntityWorld().destroyBlock(blockPos, true);
 				}
 				else if(this.taskOwner.collidedHorizontally) {
 					int height = Math.round(this.taskOwner.height+0.4f);
 					final BlockPos pos = new BlockPos(this.taskOwner.posX+dir.getFrontOffsetX(), this.taskOwner.posY, this.taskOwner.posZ+dir.getFrontOffsetZ());
 					for(int i=0;i<height;i++) {
-						this.taskOwner.getEntityWorld().destroyBlock(pos.add(0,i,0), true);
-					}
-				}
-				else {
-					if(!this.taskOwner.canEntityBeSeen(target) && this.cooldown <= 0) {
-						final World world = this.taskOwner.getEntityWorld();
-						world.createExplosion(this.taskOwner, this.taskOwner.posX, this.taskOwner.posY, this.taskOwner.posZ, 3.0f, true);
-						this.cooldown = 100;
+						final BlockPos newPos = pos.add(0,i,0);
+						final Block block = this.taskOwner.getEntityWorld().getBlockState(newPos).getBlock();
+						if(!Arrays.asList(blacklist).contains(block)) 
+							this.taskOwner.getEntityWorld().destroyBlock(newPos, true);
 					}
 				}
 			}
-			
-			--this.cooldown;
-			
+					
 			super.updateTask();
 		}
 	}
