@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+	  "SSS",
+	  "SAS",
+	  "SSS"
+	],
+	"key": {
+	  "A": {
+		  "item": "gladius:blood_diamond"
+	  },
+	  "S": {
+	  	"item": "minecraft:gold_block",
+	  	"data": 0
+	  }
+	},
+	"result": {
+		"item": "gladius:blood_diamond_core"
+	}
+}

@@ -3,17 +3,18 @@ package com.titosworld.gladius.item;
 import com.titosworld.gladius.Gladius;
 import com.titosworld.gladius.potion.ModPotions;
 import com.titosworld.gladius.potion.PotionEffectLifeVamp;
+import com.titosworld.gladius.util.Utils;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextComponentTranslation;
 
 public class ItemSoulsBane extends ItemSword {
 	private final int MAX_CHARGE = 10;
-	private int currentCharge = 5;
 
 	public ItemSoulsBane() {
 		super(Item.ToolMaterial.DIAMOND);
@@ -30,7 +31,7 @@ public class ItemSoulsBane extends ItemSword {
 		/*
 		 * The sword itself doesn't do much damage at all. The benefit comes from the effect.
 		 */
-        return 1;
+        return 0.5f;
     }
 
 	@Override
@@ -41,17 +42,21 @@ public class ItemSoulsBane extends ItemSword {
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
     {	
 		boolean isHostile = target instanceof EntityMob;
+		NBTTagCompound nbt = stack.getTagCompound();
+		if(nbt == null) nbt = stack.serializeNBT();
+		int charge = nbt.getInteger("charge");
 		if(!isHostile) {
-			if(target.getHealth() <= 0 && this.currentCharge < this.MAX_CHARGE) {
-				this.currentCharge = Math.min(this.currentCharge+1,  this.MAX_CHARGE);
-				attacker.sendMessage(new TextComponentTranslation("The blood of the innocent fuels your weapon (Charge: "
-					+this.currentCharge+"/"+this.MAX_CHARGE+")."));
+			if(target.getHealth() <= 0 && charge < this.MAX_CHARGE) {
+				nbt.setInteger("charge", charge+1);
+				attacker.sendMessage(new TextComponentTranslation(charge+""));
 			}
-		}else {
+		}
+		else if(charge > 0) {
 	    	target.addPotionEffect(new PotionEffectLifeVamp(ModPotions.LIFE_VAMP, 100, attacker));
-	    	this.currentCharge = Math.max(this.currentCharge-1,  0);
+	    	nbt.setInteger("charge", charge-1);
 		}
         stack.damageItem(1, attacker);
+        stack.setTagCompound(nbt);
         return true;
     }
 	
