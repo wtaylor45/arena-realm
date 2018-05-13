@@ -12,11 +12,15 @@ public class PotionEffectLifeVamp extends PotionEffect {
 
     public PotionEffectLifeVamp(PotionLifeVamp potion, int duration, EntityLivingBase attacker)
     {	
-        super(potion, duration);
+    	this(potion, duration, attacker, 3);
+    }
+    
+    public PotionEffectLifeVamp(PotionLifeVamp potion, int duration, EntityLivingBase attacker, int amplifier) {
+    	super(potion, duration);
         this.duration = duration;
         this.potion = potion;
         this.attacker = attacker;
-        this.amplifier = 1;
+        this.amplifier = amplifier;
     }
 
     /**
