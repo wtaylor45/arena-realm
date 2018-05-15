@@ -21,10 +21,13 @@ public class ModBlocks {
 	
 	public static final BlockBloodDiamond BLOOD_DIAMOND = new BlockBloodDiamond(); 
 	public static final BlockBloodDiamondCore BLOOD_DIAMOND_CORE = new BlockBloodDiamondCore();
+	public static final BlockGladiusPortal GLADIUS_PORTAL = new BlockGladiusPortal();
+	public static final BlockBloodFire BLOOD_FIRE = new BlockBloodFire();
 	
 	private static final Block blocks[] = {
-			//BLOOD_DIAMOND
-			BLOOD_DIAMOND_CORE
+			BLOOD_FIRE,
+			BLOOD_DIAMOND_CORE,
+			GLADIUS_PORTAL
 	};
 	
 	@SubscribeEvent

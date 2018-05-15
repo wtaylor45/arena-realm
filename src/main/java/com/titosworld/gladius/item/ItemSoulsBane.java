@@ -6,6 +6,7 @@ import com.titosworld.gladius.potion.PotionEffectLifeVamp;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,19 +19,6 @@ public class ItemSoulsBane extends ItemSword {
 		super(ModItems.ToolMaterials.BLOOD_DIAMOND_MATERIAL);
 		GladiusItem.setItemName(this, "souls_bane");
 		this.setCreativeTab(Gladius.creativeTab);
-	}
-
-	@Override
-	/**
-	 * Returns the amount of damage this item will deal. One heart of damage is
-	 * equal to 2 damage points.
-	 */
-	public float getAttackDamage() {
-		/*
-		 * The sword itself doesn't do much damage at all. The benefit comes from the
-		 * effect.
-		 */
-		return 0.5f;
 	}
 
 	@Override
@@ -55,6 +43,7 @@ public class ItemSoulsBane extends ItemSword {
 	    	if(!hasEffect) {
 	    		target.addPotionEffect(new PotionEffectLifeVamp(ModPotions.LIFE_VAMP, 200, attacker));
 		    	nbt.setInteger("charge", charge-1);
+		    	attacker.playSound(SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, 1.0f, 2.0f);
 	    	}
 		}
         stack.damageItem(1, attacker);
