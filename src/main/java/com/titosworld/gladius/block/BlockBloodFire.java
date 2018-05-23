@@ -19,10 +19,8 @@ public class BlockBloodFire extends BlockFire {
 	@Override
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
     {
-		Utils.getLogger().info("Try spawn portal...");
         if (!ModBlocks.GLADIUS_PORTAL.trySpawnPortal(worldIn, pos))
         {
-        	Utils.getLogger().info("Cannot spawn portal here.");
             if (!worldIn.getBlockState(pos.down()).isOpaqueCube() && !this.canNeighborCatchFire(worldIn, pos))
             {
                 worldIn.setBlockToAir(pos);

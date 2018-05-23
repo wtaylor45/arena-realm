@@ -47,7 +47,6 @@ public class ModModelManager {
 	private void registerBlockModels() {
 		//registerBlockItemModel(ModBlocks.BLOOD_DIAMOND.getDefaultState());
 		registerBlockItemModel(ModBlocks.BLOOD_DIAMOND_CORE.getDefaultState());
-		registerBlockItemModel(ModBlocks.GLADIUS_PORTAL.getDefaultState());
 	}
 	
 	private void registerBlockItemModel(final IBlockState state) {

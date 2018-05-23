@@ -1,5 +1,6 @@
 package com.titosworld.gladius;
 
+import com.titosworld.gladius.dimension.ModDimensions;
 import com.titosworld.gladius.item.ModItems;
 import com.titosworld.gladius.proxy.CommonProxy;
 import com.titosworld.gladius.tab.CreativeTabTutorial;
@@ -37,6 +38,7 @@ public class Gladius {
 	public static void init(FMLInitializationEvent event) {
 		Utils.getLogger().info(Reference.NAME+" version "+Reference.VERSION+" has been loaded successfully!");
 		ModWorldGenerators.registerWorldGen();
+		ModDimensions.init();
 		proxy.init(event);
 	}
 
